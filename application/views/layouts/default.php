@@ -7,8 +7,13 @@
     <title><?= $title ?></title>
     <script src="/public/scripts/jquery.js"></script>
     <script src="/public/scripts/form.js"></script>
+    <?= BOOTSTRAP_SCRIPT_CSS; ?>
+    <link rel="stylesheet" href="../css/site.css">
+
 </head>
 <body>
     <?= $content; ?>
+    <?php echo BOOTSTRAP_SCRIPT_JS; ?>
+
 </body>
 </html>

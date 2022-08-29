@@ -11,7 +11,6 @@ $(document).ready(function(){
             processData: false,
             responseType: false,
             success: function(result) {
-                alert(result);
                 json = jQuery.parseJSON(result);
                 if (json.url) {
                     window.location.href = json.url;

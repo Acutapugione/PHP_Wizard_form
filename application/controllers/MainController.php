@@ -9,13 +9,10 @@ class MainController extends Controller{
     
     public function indexAction()
     {
-        
-        $result = $this->model->getMembers();
-        $variables = [
-            'members' => $result,
+        $vars = [
+            'members' => $this->model->getMembers(),
         ];
-        $this->view->render('Главная страница', $variables);
-        // echo 'Main page';
+        $this->view->render('Главная страница', $vars);
     }
 
 }

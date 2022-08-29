@@ -1,5 +1,5 @@
 <?php
-define('COUNTRIES', [
+return [
     "AF" => "Afghanistan",
     "AX" => "Aland Islands",
     "AL" => "Albania",
@@ -252,4 +252,4 @@ define('COUNTRIES', [
     "YE" => "Yemen",
     "ZM" => "Zambia",
     "ZW" => "Zimbabwe",
-]);
+];

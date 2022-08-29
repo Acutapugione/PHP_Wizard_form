@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
+    <title><?= $title ?></title>
     <?= BOOTSTRAP_SCRIPT_CSS; ?>
     <link rel="stylesheet" href="../css/site.css">
 </head>

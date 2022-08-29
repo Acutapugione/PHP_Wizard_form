@@ -1,10 +1,3 @@
-<!-- <h3>Log in</h3>
-<form action="/account/login" method="post">
-    <input type="text" name="login">
-    <input type="text" name="password">
-    <button type="submit" name="enter">Login</button>
-</form>-->
-<?php debug($form_settings); ?>
 <header>
     <div id="map">
     </div>
@@ -83,3 +76,8 @@
         </div>
     </form>
 </div>
+
+<?php echo BOOTSTRAP_SCRIPT_JS; ?>
+<script src="wizzardform.js"></script>
+<script src="//maps.googleapis.com/maps/api/js?key=<?= MAP_API_KEY; ?>"></script>
+<script src="loadmap.js"></script>

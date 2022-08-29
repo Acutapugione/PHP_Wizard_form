@@ -2,6 +2,8 @@
 
 namespace application\core;
 
+require_once 'application/config/bootstrap.php';
+
 class View
 {
     
@@ -20,7 +22,9 @@ class View
 
     public function render($title, $variables = [])
     {
+        
         extract( $variables );
+        
         $viewFile = 'application/views/'.$this->path.'.php';
         if (file_exists( $viewFile ) ){
             ob_start();
@@ -37,7 +41,9 @@ class View
         http_response_code($code);
         $errorViewFile = 'application/views/errors/'.$code.'.php';
         if (file_exists($errorViewFile)){
-            require 'application/views/errors/'.$code.'.php';
+            require $errorViewFile;
+        } else {
+            debug( $errorViewFile );
         }
         exit;
     }
@@ -46,6 +52,14 @@ class View
     {
         header('location: '.$url);
         exit;
+    }
+
+    public function message($status, $message){
+        exit(json_encode(['status' => $status, 'message' => $message]));
+    }
+
+    public function location($url){
+        exit(json_encode(['url' => $url]));
     }
 }
 
