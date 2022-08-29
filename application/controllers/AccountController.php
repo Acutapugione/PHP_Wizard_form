@@ -8,7 +8,7 @@ class AccountController extends Controller{
 
     public function __construct($route) {
         parent::__construct($route);
-        //$this->before();
+        $this->before();
     }
     public function before()
     {
@@ -25,6 +25,7 @@ class AccountController extends Controller{
 
         $countries = require 'application/config/countries.php';
         $variables = [
+            'map_api_key' => '',
     'id' => 'register_form',
     'title' => 'To participate in the conference, please fill out the form',
     'fields' => [

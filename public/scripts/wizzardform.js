@@ -1,7 +1,7 @@
 if (!sessionStorage) {
     alert("Session storage не підтримується");
 }
-
+alert(sessionStorage);
 var currentTab = 0;
 
 if (sessionStorage.getItem('currentTab')) {

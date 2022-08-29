@@ -1,9 +1,3 @@
-<!-- <h3>Log in</h3>
-<form action="/account/login" method="post">
-    <input type="text" name="login">
-    <input type="text" name="password">
-    <button type="submit" name="enter">Login</button>
-</form>-->
 <header>
     <div id="map">
     </div>
@@ -87,3 +81,4 @@
         </div>
     </form>
 </div>
+<script src="//maps.googleapis.com/maps/api/js?key=<?= $map_api_key; ?>"></script>
