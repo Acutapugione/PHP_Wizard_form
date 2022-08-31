@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1
--- Время создания: Авг 31 2022 г., 12:50
+-- Время создания: Авг 31 2022 г., 14:41
 -- Версия сервера: 10.4.24-MariaDB
 -- Версия PHP: 7.4.29
 
@@ -58,7 +58,7 @@ CREATE TABLE `members` (
   `report_subject` varchar(250) NOT NULL,
   `country` int(11) NOT NULL,
   `phone` varchar(17) NOT NULL,
-  `email` varchar(20) NOT NULL,
+  `email` varchar(100) NOT NULL,
   `company` int(11) DEFAULT NULL,
   `position` varchar(20) DEFAULT NULL,
   `about` varchar(250) DEFAULT NULL,
@@ -101,7 +101,7 @@ ALTER TABLE `members`
 -- AUTO_INCREMENT для таблицы `companies`
 --
 ALTER TABLE `companies`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT для таблицы `countries`
