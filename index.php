@@ -9,8 +9,8 @@ spl_autoload_register(function ($class) {
         require $path;
     }
 });
-
 session_start();
+unset($_SESSION);
 
 $router = new Router;
 $router->run();
