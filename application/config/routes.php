@@ -24,17 +24,17 @@ return [
         'action' => 'login',
     ],
 
-    'account/login' => [
+    'account/signup' => [
         'controller' => 'account',
-        'action' => 'login',
+        'action' => 'signup',
     ],
     'account/register' => [
         'controller' => 'account',
         'action' => 'register',
     ],
-    'account/logout' => [
-        'controller' => 'account',
-        'action' => 'logout',
-    ],
+    // 'account/logout' => [
+    //     'controller' => 'account',
+    //     'action' => 'logout',
+    // ],
     
 ];

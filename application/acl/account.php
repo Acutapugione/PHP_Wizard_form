@@ -5,6 +5,7 @@ return [
         '',
         'login',
         'register',
+        'signup'
     ],
     'authorized' => [
         //'', 

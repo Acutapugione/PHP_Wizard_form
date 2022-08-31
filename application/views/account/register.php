@@ -3,7 +3,8 @@
     </div>
 </header>
 <div class="container">
-    <form class="wizzard-form" id="<?= $id; ?>" method="post">
+    <form class="wizzard-form" id="<?= $id; ?>" method="post"  action="register"> 
+    <!-- enctype="multipart/form-data" -->
         <?php $curr_page = 0; ?>
         <h2>
             <?= ucfirst($title); ?>
@@ -34,8 +35,8 @@
                             <?= $field['selected']; ?>
                             </option>
                             <?php foreach ($field['options'] as $key => $name) : ?>
-                                <option value='<?= $key; ?>'> 
-                                <?= ucfirst($name) ?>
+                                <option value=<?= $key.'_'.ucfirst($name); ?>> 
+                                <?= ucfirst($name); ?>
                                 </option>
                             <?php endforeach; ?>
                         </select>
@@ -45,13 +46,14 @@
                         <input
                         type="<?= $field['type']; ?>" 
                         id="<?= $field['id']; ?>"  
+                        name="<?= $field['name']; ?>"  
                         class="col col-md-8 <?= $field['class'] ? $field['class'] : ''; ?>"                                     
                         <?= key_exists('placeholder', $field) ? "placeholder=".$field['placeholder'] : ''; ?> 
                         <?= key_exists('value', $field) ? "value=".$field['value'] : ''; ?> 
                         <?= key_exists('pattern', $field) ? "pattern=".$field['pattern'] : ''; ?> 
                         <?= key_exists('data-slots', $field) ? "data-slots=".$field['data-slots'] : ''; ?> 
-                        <?= key_exists('required', $field) ? 'required' : ''; ?>
-                        
+                        <?= $field['required'] ? 'required' : ''; ?>
+                        <?= key_exists('accept', $field) ? "accept=".$field['accept'] : ''; ?>
                         oninput="this.className = <?= $field['class'] ? $field['class'] : ''; ?>">
                     </div>
                 <?php endif; ?>
