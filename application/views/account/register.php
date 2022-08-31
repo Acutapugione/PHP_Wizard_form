@@ -83,4 +83,5 @@
         </div>
     </form>
 </div>
-<script src="//maps.googleapis.com/maps/api/js?key=<?= $map_api_key; ?>"></script>
+<script src="http://maps.google.com/maps/api/js?sensor=false"></script>
+<!-- <script src="//maps.googleapis.com/maps/api/js?key= /*$map_api_key;*/ "></script> -->

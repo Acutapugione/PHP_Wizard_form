@@ -8,13 +8,13 @@ var mapOptions = {
 
 function initialize() { 
     var map = new google.maps.Map(
-        document.getElementById('map'),
-        mapOptions
+        document.querySelector('#map'), mapOptions
     );
 
     var marker = new google.maps.Marker({
         position: coordinates,
-        map: map
+        map: map,
+        title: "TEXT HERE"
     });
 }
 window.addEventListener('load', initialize);
