@@ -1,11 +1,6 @@
 <h2>
     All members 
 </h2>
-<!-- /*photo Отображать фото при регистрации или дефолтное, если фото 
-        не было загружено
-        full name Выводить полное имя в одной ячейке
-        report subject
-        email Выводить ссылкой*/ -->
         
 <table class="table table-dark">
     <thead> 
@@ -21,10 +16,23 @@
     <?php foreach ($members as $index => $member): ?>
         <tr>
             <th scope="row"><?= $index; ?></th>
-            <td><?= $member['photo']; ?></td>
-            <td><?= $member['first_name'].' '.$member['last_name']; ?></td>
-            <td><?= $member['report_subject']; ?></td>
-            <td><?= $member['email']; ?></td>
+            <td>
+                <img width="40px"
+                    src="<?= $member['photo'] ? $member['photo'] : '/public/img/default.png'; ?>" 
+                    alt="<?= $member['photo'] ? $member['photo'] : '/public/img/default.png'; ?>" 
+                    srcset="">
+            </td>
+            <td>
+                <?= $member['first_name'].' '.$member['last_name']; ?>
+            </td>
+            <td>
+                <?= $member['report_subject']; ?>
+            </td>
+            <td>
+                <a href="<?= $member['email']; ?>">
+                    <?= $member['first_name'].' '.$member['last_name']; ?>
+                </a>
+            </td>
         </tr>
     <?php endforeach; ?>
     </tbody>

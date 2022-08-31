@@ -9,7 +9,7 @@ class Account extends Model
 {
     private $countryModel;
     private $companyModel;
-
+    
     public function __construct()
     {
         parent::__construct();
@@ -54,21 +54,26 @@ class Account extends Model
 
     public function signUp(array $memberData)
     {
-        if (Account::validateForm($memberData)) {
-            $this->insertMember($memberData);
+        if (Account::validateForm($memberData)) {   
+            $member = $this->getMemberId($memberData['email']);
+            if (!$member){
+                $this->insertMember($memberData);
+                $member = $this->getMemberId($memberData['email']);
+            }
+            return $member;
         }
     }
 
     public function setCompanyId(array $formData = []): array
     {
-        $companyData = $formData['company'];
+        $companyData = ['name' => $formData['company']];
         if (!empty($companyData)) {
-            $companyId = $this->companyModel->getCompanyId($companyData);
+            $companyId = $this->companyModel->getCompanyId($companyData['name']);
             if (empty($companyId)) {
-                $this->companyModel->addComppany($companyData);
-                $companyId = $this->companyModel->getCompanyId($companyData);
+                $this->companyModel->addCompany($companyData);
+                $companyId = $this->companyModel->getCompanyId($companyData['name']);
             }
-            $formData['company'] = $companyId;
+            $formData['company'] = intval($companyId);
         }
         return $formData;
     }
@@ -86,38 +91,37 @@ class Account extends Model
             $countryId = $this->countryModel->getCountryId($country['code']);
         }
         
-        $formData['country'] = $countryId;
+        $formData['country'] = intval($countryId);
         return $formData;
     }
 
     public function insertMember($formData = [])
     {
         try {
-            $this->setCountryId($formData);
-            $this->setCompanyId($formData);
+            $formData = $this->setCountryId($formData);
+            $formData = $this->setCompanyId($formData);
+
             $result = $this->db->column("INSERT INTO members 
-            (id, first_name, last_name, birthdate, report_subject,
-            country, phone, email, company, position, about, photo)
-            VALUES( Null, ':first_name',
-                    ':last_name', ':birthdate',
-                    ':report_subject', '',
-                    ':phone', ':email',
-                    ':company', ':position',
-                    ':about_me', ':photo' )", $formData);
-            debug($formData);
+                (id, first_name, last_name, 
+                birthdate, report_subject, country, 
+                phone, email, company,
+                position, about, photo)
+                VALUES( Null, :first_name, :last_name, 
+                :birthdate, :report_subject, :country,
+                :phone, :email, :company,
+                :position, :about_me, :photo )", $formData);
+            
+            return $result;
         } catch (\Throwable $e) {
             echo $e->getMessage();
         }
     }
 
-    public function getMembers()
+    
+    public function getMemberId(string $email)
     {
-        /*photo Отображать фото при регистрации или дефолтное, если фото 
-        не было загружено
-        full name Выводить полное имя в одной ячейке
-        report subject
-        email Выводить ссылкой*/
-        $result = $this->db->row('SELECT photo, first_name, last_name, report_subject, email FROM members');
+        $result = $this->db->column("SELECT id FROM members WHERE email = :email", ['email' => $email]);
         return $result;
     }
+
 }

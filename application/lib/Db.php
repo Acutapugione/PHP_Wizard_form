@@ -22,7 +22,6 @@ class Db
 
     public function query($sql, $params = [])
     {
-        // extract( $params );
         $prepared = $this->db->prepare($sql);
         if (!empty($params)){
             foreach ($params as $param => $value) {

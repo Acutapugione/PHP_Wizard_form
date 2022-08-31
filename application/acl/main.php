@@ -1,19 +1,18 @@
 <?php 
 return [ 
     'all' => [
-        'index',
-        'about',
-        'contact',
-        'post',
+        //
     ],
     'authorized' => [
+        'index', 
         '', 
     ],
     'guest' => [
         // 'login', 'register'
     ],
     'admin' => [
-        //
+        'index', 
+        '', 
     ],
 ]
 ?>

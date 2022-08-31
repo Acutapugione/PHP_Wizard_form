@@ -14,8 +14,8 @@ class Company extends Model
     public function addCompany(array $company)
     {
         $result = $this->db->column(
-            "INSERT INTO companies(`id`, `name`) 
-            VALUES ( Null, ':name')",
+            "INSERT INTO companies (id, name) 
+            VALUES ( Null, :name)",
             $company
         );
         return $result;
@@ -23,9 +23,10 @@ class Company extends Model
 
     public function getCompanyId(string $match)
     {
-        $result = $this->db->column('SELECT id FROM companies WHERE name = :match', ['match' => $match]);
+        $result = $this->db->column("SELECT id FROM companies WHERE name = :match", ['match' => $match]);
+        
         if(!empty($result)) {
-            return $result[0];
+            return  intval($result);
         }
     }
 }

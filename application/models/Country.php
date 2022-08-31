@@ -14,8 +14,8 @@ class Country extends Model
     public function addCountry(array $country)
     {
         $result = $this->db->column(
-            "INSERT INTO countries ('id', 'name', 'code') 
-            VALUES ( Null, ':name', ':code' )",
+            "INSERT INTO countries (id, name, code) 
+            VALUES ( Null, :name, :code )",
             ['name' => $country['name'], 'code' => $country['code']]
         );
         return $result;
@@ -23,9 +23,9 @@ class Country extends Model
 
     public function getCountryId(string $match)
     {
-        $result = $this->db->column("SELECT id FROM countries WHERE name = ':match' or code = ':match'", ['match' => $match]);
+        $result = $this->db->column("SELECT id FROM countries WHERE name = :match or code = :match", ['match' => $match]);
         if(!empty($result)) {
-            return $result[0];
+            return intval($result);
         }
     }
 }

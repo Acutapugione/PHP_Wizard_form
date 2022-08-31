@@ -6,18 +6,11 @@ return [
         'controller' => 'main',
         'action' => 'index',
     ],    
-    'about' => [
+    'index' => [
         'controller' => 'main',
-        'action' => 'about',
+        'action' => 'index',
     ],
-    'contact' => [
-        'controller' => 'main',
-        'action' => 'contact',
-    ],
-    'post' => [
-        'controller' => 'main',
-        'action' => 'post',
-    ],
+
     // AccountController
     'account' => [
         'controller' => 'account',
@@ -28,13 +21,10 @@ return [
         'controller' => 'account',
         'action' => 'signup',
     ],
+    
     'account/register' => [
         'controller' => 'account',
         'action' => 'register',
     ],
-    // 'account/logout' => [
-    //     'controller' => 'account',
-    //     'action' => 'logout',
-    // ],
     
 ];

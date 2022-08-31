@@ -3,6 +3,7 @@
 namespace application\controllers;
 
 use application\core\Controller;
+use application\core\View;
 use application\models\Account;
 
 class AccountController extends Controller
@@ -18,33 +19,19 @@ class AccountController extends Controller
         $this->view->layout = 'wizzard';
     }
 
-    public function loginAction()
-    {
-        $this->view->render('Вход');
-    }
-
     public function signupAction()
     {
-        
-        // $vars = array(
-        //     'first_name' => 'vasya'
-        // );
-        // var_dump($_POST);
-        // var_dump($vars);
-        // debug($_POST['first_name']);
         if(!empty($_POST)){
             $vars = $_POST;
             if( key_exists('country', $_POST)){
                 $vars['country'] = $this->model->getCountryId($_POST['country']);
             }
-            debug($vars);
-            //$vars = $_POST['first_name'];
         }
-        $this->model->validateForm();
-        
+        $this->model->validateForm();        
         $this->view->redirect('register');
     }
 
+    
     public function registerAction()
     {
         if( !empty($_POST)){
@@ -55,10 +42,20 @@ class AccountController extends Controller
                 $memberData['photo'] = $path;
             }
             $member = $this->model->signUp($memberData);
+            if($member){
+                $_SESSION['authorize'] = ['id' => $member ];
+            }
         }
+        if ( !empty($_SESSION)){
+            if (isset($_SESSION['authorize']['id'])){
+                $this->view->redirect('../');        
+                exit();               
+            }
+        }
+        $map_api_key =  require 'application/config/map.php';
         $countries = require 'application/config/countries.php';
         $variables = [
-            'map_api_key' => '',
+            'map_api_key' => $map_api_key['api'],
             'id' => 'register_form',
             'title' => 'To participate in the conference, please fill out the form',
             'fields' => [
@@ -160,7 +157,6 @@ class AccountController extends Controller
                 ],
             ],
         ];
-        // debug($variables);
         $this->view->render('Регистрация', $variables);
     }
 }

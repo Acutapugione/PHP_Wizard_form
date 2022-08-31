@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1
--- Время создания: Авг 29 2022 г., 20:37
+-- Время создания: Авг 31 2022 г., 12:50
 -- Версия сервера: 10.4.24-MariaDB
 -- Версия PHP: 7.4.29
 
@@ -44,13 +44,6 @@ CREATE TABLE `countries` (
   `code` char(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Дамп данных таблицы `countries`
---
-
-INSERT INTO `countries` (`id`, `name`, `code`) VALUES
-(1, 'Afghanistan', 'AF');
-
 -- --------------------------------------------------------
 
 --
@@ -62,22 +55,15 @@ CREATE TABLE `members` (
   `first_name` varchar(20) NOT NULL,
   `last_name` varchar(20) NOT NULL,
   `birthdate` date NOT NULL,
-  `report_subject` text NOT NULL,
+  `report_subject` varchar(250) NOT NULL,
   `country` int(11) NOT NULL,
   `phone` varchar(17) NOT NULL,
   `email` varchar(20) NOT NULL,
   `company` int(11) DEFAULT NULL,
-  `position` int(11) DEFAULT NULL,
-  `about` text DEFAULT NULL,
-  `photo` blob DEFAULT NULL
+  `position` varchar(20) DEFAULT NULL,
+  `about` varchar(250) DEFAULT NULL,
+  `photo` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Дамп данных таблицы `members`
---
-
-INSERT INTO `members` (`id`, `first_name`, `last_name`, `birthdate`, `report_subject`, `country`, `phone`, `email`, `company`, `position`, `about`, `photo`) VALUES
-(1, 'Ighdo', 'Kali', '2022-08-11', 'some text must be here', 1, '+1 (555) 555-5555', 'example@io', NULL, NULL, NULL, NULL);
 
 --
 -- Индексы сохранённых таблиц
@@ -104,7 +90,7 @@ ALTER TABLE `countries`
 ALTER TABLE `members`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `email` (`email`),
-  ADD KEY `country_id` (`country`),
+  ADD KEY `country` (`country`) USING BTREE,
   ADD KEY `company` (`company`);
 
 --
@@ -115,19 +101,19 @@ ALTER TABLE `members`
 -- AUTO_INCREMENT для таблицы `companies`
 --
 ALTER TABLE `companies`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT для таблицы `countries`
 --
 ALTER TABLE `countries`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT для таблицы `members`
 --
 ALTER TABLE `members`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Ограничения внешнего ключа сохраненных таблиц
@@ -137,8 +123,8 @@ ALTER TABLE `members`
 -- Ограничения внешнего ключа таблицы `members`
 --
 ALTER TABLE `members`
-  ADD CONSTRAINT `members_ibfk_1` FOREIGN KEY (`country`) REFERENCES `countries` (`id`),
-  ADD CONSTRAINT `members_ibfk_2` FOREIGN KEY (`company`) REFERENCES `companies` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+  ADD CONSTRAINT `members_ibfk_1` FOREIGN KEY (`company`) REFERENCES `companies` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `members_ibfk_2` FOREIGN KEY (`country`) REFERENCES `countries` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

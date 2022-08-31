@@ -14,6 +14,8 @@ abstract class Controller
         $this->route = $route;
         
         if( !$this->checkAcl() ){
+            $this->view = new View('account');
+            $this->view->redirect('account/register');
             debug( View::errorCode(403) );
         }
         $this->view = new View($route);
@@ -48,7 +50,7 @@ abstract class Controller
                 return true;
             }
         } else {
-            View::errorCode(403);
+            View::errorCode(404);
         }
         return false;
     }

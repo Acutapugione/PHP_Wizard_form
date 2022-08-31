@@ -1,7 +1,6 @@
 if (!sessionStorage) {
     alert("Session storage не підтримується");
 }
-alert('Wizzard.js');
 var currentTab = 0;
 
 if (sessionStorage.getItem('currentTab')) {
